@@ -116,6 +116,7 @@ def wait_for(*args, **kwargs):
 		# waits for certain buttons if no arguments passed
 		if mode == "or":
 			print("or")
+			print(pins["out"].items())
 			pressed = False
 			while not pressed:
 				for name, pin in pins["out"].items():
