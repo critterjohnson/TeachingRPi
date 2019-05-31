@@ -119,7 +119,7 @@ def wait_for(*args, **kwargs):
 			pressed = False
 			while not pressed:
 				for name, pin in pins["out"].items():
-					if name in args and GPIO.input(pin):
+					if name in args: # and GPIO.input(pin):
 						print("got press")
 						pressed = True
 		elif mode == "and":
