@@ -152,8 +152,7 @@ def cam(file_name, timer=2):
 	camera.start_preview()
 	time.sleep(timer)
 	try:
-		img_name = f"{file_name}.jpg"
-		path = os.path.join(os.getcwd(), img_name)
+		path = os.path.join(os.getcwd(), file_name + ".jpg")
 		camera.capture(path)
 	except:
 		pass
