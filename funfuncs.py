@@ -52,7 +52,7 @@ def turn_on(*args):
 	# get the pin numbers from the args
 	else:
 		for name in args:
-			GPIO.output(pins[name], True)
+			GPIO.output(pins["out"][name], True)
 	pins.close()
 
 # turns off a pin or pins by pin number or name,
