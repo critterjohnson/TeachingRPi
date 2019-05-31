@@ -9,7 +9,7 @@ set_as_output(21, "dog")
 
 count = 0
 while count < 10:
-	wait_for("cat", mode="and")
+	wait_for(mode="and")
 	count += 1
 	turn_on("dog")
 	wait(0.1)
