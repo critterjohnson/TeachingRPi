@@ -25,7 +25,7 @@ def wait(sec):
 
 # sets up a pin for output and adds it to the shelf
 def set_as_output(pin, name=None):
-	pins = shelve.open("pins")
+	pins = shelve.open("pins", writeback=True)
 	pins["out"][pin] = pin
 	if name is not None:
 		pins["out"][name] = pin
@@ -34,7 +34,7 @@ def set_as_output(pin, name=None):
 
 # sets a pin as input and adds it to the shelf
 def set_as_input(pin, name=None):
-	pins = shelve.open("pins")
+	pins = shelve.open("pins", writeback=True)
 	pins["in"][name] = pin
 	if name is not None:
 		pins["in"][name] = pin
@@ -44,7 +44,7 @@ def set_as_input(pin, name=None):
 # turns on a pin or pins by pin number or by name,
 # or pass nothing to turn on all lights
 def turn_on(*args):
-	pins = shelve.open("pins")
+	pins = shelve.open("pins", writeback=True)
 	# turns on all lights if no arguments passed
 	if len(args) == 0:
 		print("no args")
@@ -63,7 +63,7 @@ def turn_on(*args):
 # turns off a pin or pins by pin number or name,
 # or pass nothing to turn off all lights
 def turn_off(*args):
-	pins = shelve.open("pins")
+	pins = shelve.open("pins", writeback=True)
 	# turns on all lights if no arguments passed
 	if len(args) == 0:
 		for name, pin in pins["out"].items():
