@@ -80,69 +80,65 @@ def wait_for(*args, **kwargs):
 	else:
 		mode = "and"
 	pins = shelve.open("pins", writeback=True)
-	try:
-		# waits for all buttons if no arguments passed
-		if len(args) == 0:
-			print("no args")
-			if mode == "or":
-				print("or")
-				print(pins["in"].items())
-				pressed = False
-				while not pressed:
-					for name, pin in pins["in"].items():
-						if GPIO.input(pin):
-							print("got press")
-							pressed = True
-			elif mode == "and":
-				# creates pin states dict
-				pin_states = {}
+	# waits for all buttons if no arguments passed
+	if len(args) == 0:
+		print("no args")
+		if mode == "or":
+			print("or")
+			print(pins["in"].items())
+			pressed = False
+			while not pressed:
 				for name, pin in pins["in"].items():
-					pin_states[pin] = False
-				while True:
-					# assigns pin states
-					for name, pin in pins["in"].items():
-						pin_states[pin] = GPIO.input(pin)
-					# checks pin states
-					count = 0
-					for pin, val in pin_states.items():
-						if val:
-							count += 1
-						else:
-							break
-					if count == len(pin_states):
+					if GPIO.input(pin):
+						print("got press")
+						pressed = True
+		elif mode == "and":
+			# creates pin states dict
+			pin_states = {}
+			for name, pin in pins["in"].items():
+				pin_states[pin] = False
+			while True:
+				# assigns pin states
+				for name, pin in pins["in"].items():
+					pin_states[pin] = GPIO.input(pin)
+				# checks pin states
+				count = 0
+				for pin, val in pin_states.items():
+					if val:
+						count += 1
+					else:
 						break
-		# waits for certain buttons
-		else:
-			print("args")
-			# waits for certain buttons if no arguments passed
-			if mode == "or":
-				print("or")
-				print(pins["in"].items())
-				pressed = False
-				while not pressed:
-					for name, pin in pins["in"].items():
-						if name in args and GPIO.input(pin):
-							print("got press")
-							pressed = True
-			elif mode == "and":
-				# creates pin states dict
-				pin_states = {}
-				for name in args:
-					pin_states[pins["in"][name]] = False
-				while True:
-					# assigns pin states
-					for pin, val in pin_states:
-						pin_states[pin] = GPIO.input(pin)
-					# checks pin states
-					count = 0
-					for pin, val in pin_states.items():
-						if val:
-							count += 1
-						else:
-							break
-					if cound == len(pin_states):
+				if count == len(pin_states):
+					break
+	# waits for certain buttons
+	else:
+		print("args")
+		# waits for certain buttons if no arguments passed
+		if mode == "or":
+			print("or")
+			print(pins["in"].items())
+			pressed = False
+			while not pressed:
+				for name, pin in pins["in"].items():
+					if name in args and GPIO.input(pin):
+						print("got press")
+						pressed = True
+		elif mode == "and":
+			# creates pin states dict
+			pin_states = {}
+			for name in args:
+				pin_states[pins["in"][name]] = False
+			while True:
+				# assigns pin states
+				for pin, val in pin_states:
+					pin_states[pin] = GPIO.input(pin)
+				# checks pin states
+				count = 0
+				for pin, val in pin_states.items():
+					if val:
+						count += 1
+					else:
 						break
-	except KeyboardInterrupt:
-		print("keyboard knterrupt")
-		break
+				if cound == len(pin_states):
+					break
 	pins.close()
