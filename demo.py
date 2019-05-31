@@ -17,9 +17,9 @@ while count < 10:
 	wait(0.2)
 	turn_off()
 
-# demo camera
+# demo camera - note: Both tests cannot be run at once
 cam_preview()
-print("Taking picture in 10 seconds...")
-cam("critter", 10)
+#print("Taking picture in 10 seconds...")
+#cam("critter", 10)
 
 end()
