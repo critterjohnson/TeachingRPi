@@ -49,9 +49,11 @@ def turn_on(*args):
 	if len(args) == 0:
 		for name, pin in pins["out"].items():
 			GPIO.output(pin, True)
+		print("no args")
 	# get the pin numbers from the args
 	else:
 		for name in args:
+			print("args")
 			GPIO.output(pins[name], True)
 	pins.close()
 
