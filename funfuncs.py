@@ -48,6 +48,7 @@ def turn_on(*args):
 	# turns on all lights if no arguments passed
 	if len(args) == 0:
 		print("no args")
+		print(pins["out"].items())
 		for name, pin in pins["out"].items():
 			print(name, pin)
 			GPIO.output(pin, True)
