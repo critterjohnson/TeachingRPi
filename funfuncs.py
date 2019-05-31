@@ -49,7 +49,9 @@ def turn_on(*args):
 	if len(args) == 0:
 		print("no args")
 		for name, pin in pins["out"].items():
+			print(name, pin)
 			GPIO.output(pin, True)
+			print("light on")
 	# get the pin numbers from the args
 	else:
 		print("args")
@@ -64,7 +66,9 @@ def turn_off(*args):
 	# turns on all lights if no arguments passed
 	if len(args) == 0:
 		for name, pin in pins["out"].items():
+			print(name, pin)
 			GPIO.output(pin, False)
+			print("light off")
 	# get the pin numbers from the args
 	else:
 		for name in args:
