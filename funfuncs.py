@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 from picamera import PiCamera
 import time
 import shelve
+import os
 
 
 # sets up the pi for GPIO output and creates the storage shelf
@@ -134,3 +135,24 @@ def wait_for(*args, **kwargs):
 				if count == len(pin_states):
 					break
 	pins.close()
+
+# shows what the camera is seeing for a specified amount of time
+def cam_preview(sec=10):
+	camera = PiCamera()
+	camera.start_preview()
+	time.sleep(sec)
+	camera.stop_preview()
+
+# takes a picture after a specified amount of time, saves to cwd/file_name.jpg
+# if timer < 2, it is overridden
+def cam(file_name, timer=2):
+	if timer < 2:
+		timer = 2
+	camera = PiCamera()
+	camera.start_preview()
+	time.sleep(timer)
+	try:
+		camera.capture(os.path.join(os.getcwd(), f"{file_name}.jpg"))
+	except:
+		pass
+	camera.stop_preview() 
