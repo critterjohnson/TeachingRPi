@@ -1,2 +1,2 @@
 # TeachingRPi
-Teaching interactive Python with Raspberry Pis
+Some code from https://github.com/KsMomOf2/GWCRaspberryPi
