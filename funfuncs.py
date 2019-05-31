@@ -130,7 +130,7 @@ def wait_for(*args, **kwargs):
 				pin_states[pins["in"][name]] = False
 			while True:
 				# assigns pin states
-				for pin, val in pin_states:
+				for pin, val in pin_states.items():
 					pin_states[pin] = GPIO.input(pin)
 				# checks pin states
 				count = 0
