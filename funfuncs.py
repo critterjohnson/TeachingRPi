@@ -47,15 +47,10 @@ def turn_on(*args):
 	pins = shelve.open("pins", writeback=True)
 	# turns on all lights if no arguments passed
 	if len(args) == 0:
-		print("no args")
-		print(pins["out"].items())
 		for name, pin in pins["out"].items():
-			print(name, pin)
 			GPIO.output(pin, True)
-			print("light on")
 	# get the pin numbers from the args
 	else:
-		print("args")
 		for name in args:
 			GPIO.output(pins[name], True)
 	pins.close()
@@ -67,11 +62,68 @@ def turn_off(*args):
 	# turns on all lights if no arguments passed
 	if len(args) == 0:
 		for name, pin in pins["out"].items():
-			print(name, pin)
 			GPIO.output(pin, False)
-			print("light off")
 	# get the pin numbers from the args
 	else:
 		for name in args:
 			GPIO.output(pins[name], False)
 	pins = shelve.open("pins")
+
+# waits for an input from a button multiple buttons 
+# by pin number or name or pass nothing to wait for all buttons
+# if mode is "and", waits for all buttons
+# if mode is "or", waits for only one button
+def wait_for(*args, mode="and"):
+	pins = shelve.open("pins", writeback=True)
+	# waits for all buttons if no arguments passed
+	if len(args) == 0:
+		if mode == "or":
+			pressed = False
+			while not pressed:
+				for name, pin in pins["out"].items():
+					if GPIO.input(pin):
+						pressed = True
+		elif mode == "and":
+			# creates pin states dict
+			pin_states = {}
+			for name, pin in pins["out"].items():
+				pin_states[pin] = False
+			while True:
+				# assigns pin states
+				for name, pin in pins["out"].items():
+					pin_states[pin] = GPIO.input(pin)
+				# checks pin states
+				count = 0
+				for pin, val in pin_states.items():
+					if val:
+						count += 1
+					else:
+						break
+				if count == len(pin_states):
+					break
+	# waits for certain buttons if no arguments passed
+	if mode == "or":
+		pressed = False
+		while not pressed:
+			for name, pin in pins["out"].items():
+				if name in args and GPIO.input(pin):
+					pressed = True
+	elif mode == "and":
+		# creates pin states dict
+		pin_states = {}
+		for name in args:
+			pin_states[pins["out"][name]] = False
+		while True:
+			# assigns pin states
+			for pin, val in pin_states:
+				pin_states[pin] = GPIO.input(pin)
+			# checks pin states
+			count = 0
+			for pin, val in pin_states.items():
+				if val:
+					count += 1
+				else:
+					break
+			if cound == len(pin_states):
+				break
+	pins.close()
