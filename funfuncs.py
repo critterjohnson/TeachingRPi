@@ -106,29 +106,31 @@ def wait_for(*args, **kwargs):
 						break
 				if count == len(pin_states):
 					break
-	# waits for certain buttons if no arguments passed
-	if mode == "or":
-		pressed = False
-		while not pressed:
-			for name, pin in pins["out"].items():
-				if name in args and GPIO.input(pin):
-					pressed = True
-	elif mode == "and":
-		# creates pin states dict
-		pin_states = {}
-		for name in args:
-			pin_states[pins["out"][name]] = False
-		while True:
-			# assigns pin states
-			for pin, val in pin_states:
-				pin_states[pin] = GPIO.input(pin)
-			# checks pin states
-			count = 0
-			for pin, val in pin_states.items():
-				if val:
-					count += 1
-				else:
+	# waits for certain buttons
+	else:
+		# waits for certain buttons if no arguments passed
+		if mode == "or":
+			pressed = False
+			while not pressed:
+				for name, pin in pins["out"].items():
+					if name in args and GPIO.input(pin):
+						pressed = True
+		elif mode == "and":
+			# creates pin states dict
+			pin_states = {}
+			for name in args:
+				pin_states[pins["out"][name]] = False
+			while True:
+				# assigns pin states
+				for pin, val in pin_states:
+					pin_states[pin] = GPIO.input(pin)
+				# checks pin states
+				count = 0
+				for pin, val in pin_states.items():
+					if val:
+						count += 1
+					else:
+						break
+				if cound == len(pin_states):
 					break
-			if cound == len(pin_states):
-				break
 	pins.close()
