@@ -144,4 +144,5 @@ def wait_for(*args, **kwargs):
 						break
 	except KeyboardInterrupt:
 		print("keyboard knterrupt")
+		break
 	pins.close()
