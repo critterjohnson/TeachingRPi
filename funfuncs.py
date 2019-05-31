@@ -82,15 +82,11 @@ def wait_for(*args, **kwargs):
 	pins = shelve.open("pins", writeback=True)
 	# waits for all buttons if no arguments passed
 	if len(args) == 0:
-		print("no args")
 		if mode == "or":
-			print("or")
-			print(pins["in"].items())
 			pressed = False
 			while not pressed:
 				for name, pin in pins["in"].items():
 					if GPIO.input(pin):
-						print("got press")
 						pressed = True
 		elif mode == "and":
 			# creates pin states dict
@@ -112,16 +108,12 @@ def wait_for(*args, **kwargs):
 					break
 	# waits for certain buttons
 	else:
-		print("args")
 		# waits for certain buttons if no arguments passed
 		if mode == "or":
-			print("or")
-			print(pins["in"].items())
 			pressed = False
 			while not pressed:
 				for name, pin in pins["in"].items():
 					if name in args and GPIO.input(pin):
-						print("got press")
 						pressed = True
 		elif mode == "and":
 			# creates pin states dict
