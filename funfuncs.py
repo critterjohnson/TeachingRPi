@@ -73,7 +73,12 @@ def turn_off(*args):
 # by pin number or name or pass nothing to wait for all buttons
 # if mode is "and", waits for all buttons
 # if mode is "or", waits for only one button
-def wait_for(*args, mode="and"):
+def wait_for(*args, **kwargs):
+	# sets default params
+	if "mode" in kwargs:
+		mode = kwargs["mode"]
+	else:
+		mode = "and"
 	pins = shelve.open("pins", writeback=True)
 	# waits for all buttons if no arguments passed
 	if len(args) == 0:
