@@ -47,13 +47,13 @@ def turn_on(*args):
 	pins = shelve.open("pins")
 	# turns on all lights if no arguments passed
 	if len(args) == 0:
+		print("no args")
 		for name, pin in pins["out"].items():
 			GPIO.output(pin, True)
-		print("no args")
 	# get the pin numbers from the args
 	else:
+		print("args")
 		for name in args:
-			print("args")
 			GPIO.output(pins[name], True)
 	pins.close()
 
