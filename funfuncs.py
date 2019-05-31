@@ -139,6 +139,6 @@ def wait_for(*args, **kwargs):
 						count += 1
 					else:
 						break
-				if cound == len(pin_states):
+				if count == len(pin_states):
 					break
 	pins.close()
