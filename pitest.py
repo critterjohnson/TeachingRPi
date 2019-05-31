@@ -9,16 +9,16 @@ def test_board():
 	GPIO.setmode(GPIO.BCM)
 	
 	# tests lights
-	GPIO.setup(red, GPIO.OUT)
-	GPIO.output(red, True)
+	GPIO.setup(led, GPIO.OUT)
+	GPIO.output(led, True)
 	time.sleep(2)
-	GPIO.output(red, False)
+	GPIO.output(led, False)
 
 	# tests the button
 	GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 	while True:
 		try:
-			if GPIO.input(pin):
+			if GPIO.input(button):
 				print("Button pressed: test passed")
 				GPIO.cleanup()
 				break
