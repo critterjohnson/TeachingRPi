@@ -111,27 +111,34 @@ def testOut(pin):
 
 # This will test an input pin
 def testIn(pin):
-    GPIO.setup(pin, GPIO.IN)
-    count = 0
-    while count < 5:
-        if GPIO.input(pin):
-            print("Input")
-            count = count + 1
-            time.sleep(2)
-        else:
-            print("Nothing")
-            time.sleep(0.5)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    while True:
+        try:
+            if GPIO.input(pin):
+                print("Button")
+                time.sleep(0.2)
+        except KeyboardInterrupt:
+            GPIO.cleanup()
+            break
 
 def main():
-    GPIO.setmode(GPIO.BCM)
+    #GPIO.setmode(GPIO.BCM)
+    #setup()
 
     #trafficLight(3)
     #pressLight()
     #buzz()
     #movement(4)
-    testIn(motion)
-    testOut(buzzer)
-    GPIO.cleanup()
+    #testIn(motion)
+    #testOut(buzzer)
+    
+    #allOn()
+    #time.sleep(2)
+    #allOff()
+
+    #testIn(10)
+    testIn(19)
 
 main()
 
