@@ -1,5 +1,6 @@
 # Get the libraries you need
 import RPi.GPIO as GPIO
+from picamera import PiCamera
 import time
 
 # Define the pins.  If you set up your hardware on different pins, change the numbers here
@@ -121,6 +122,22 @@ def testIn(pin):
         except KeyboardInterrupt:
             GPIO.cleanup()
             break
+        
+def cam_preview(sec):
+    camera = PiCamera()
+    camera.start_preview()
+    time.sleep(sec)
+    camera.stop_preview()
+
+def cam(save_location):
+    camera = PiCamera()
+    camera.start_preview()
+    time.sleep(2)
+    try:
+        camera.capture(save_location)
+    except:
+        pass
+    camera.stop_preview()
 
 def main():
     #GPIO.setmode(GPIO.BCM)
@@ -138,7 +155,10 @@ def main():
     #allOff()
 
     #testIn(10)
-    testIn(19)
+    #testIn(19)
+
+    #cam_preview(10)
+    cam("/home/pi/Desktop/TeachingRPi/img.jpg")
 
 main()
 
