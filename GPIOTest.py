@@ -4,7 +4,7 @@ from picamera import PiCamera
 import time
 
 # Define the pins.  If you set up your hardware on different pins, change the numbers here
-red = 16
+red = 21
 green = 22
 yellow = 27
 button = 23
@@ -19,6 +19,7 @@ def setup():
 
 # Turns on all three of the lights for traffic light
 def allOn():
+    GPIO.setmode(GPIO.BCM)
     GPIO.output(red, True)
     GPIO.output(green, True)
     GPIO.output(yellow, True)
@@ -149,16 +150,19 @@ def main():
     #movement(4)
     #testIn(motion)
     #testOut(buzzer)
-    
-    #allOn()
-    #time.sleep(2)
-    #allOff()
 
-    #testIn(10)
+    GPIO.setmode(GPIO.BCM)
+    setup()
+    allOn()
+    time.sleep(2)
+    allOff()
+    GPIO.cleanup()
+
+    #testIn(26)
     #testIn(19)
 
     #cam_preview(10)
-    cam("/home/pi/Desktop/TeachingRPi/img.jpg")
+    #cam("/home/pi/Desktop/TeachingRPi/img.jpg")
 
 main()
 
