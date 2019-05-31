@@ -18,8 +18,8 @@ while count < 10:
 	turn_off()
 
 # demo camera
-cam_preview(30)
+#cam_preview(30)
 print("Taking picture in 10 seconds...")
-cam("critter", 30)
+cam("critter", 10)
 
 end()
