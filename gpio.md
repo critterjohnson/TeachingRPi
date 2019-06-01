@@ -1,6 +1,6 @@
 # GPIO with the Pi
 ## What is GPIO?
-GPIO stands for General Purpose Input-Output, and is used to send and receive electrical signals. 40 "pins" make up the GPIO on the raspberry pi, each with a 2 different numbers assigned to it. The "pysical" number, or the number the pin is based on location, and the "Broadcom Pin Number", or "BCM". The "BCM" pin number is usually what you deal with on the Raspberry Pi. The numbers are assigned as follows (credit to [pinout.xyz](https://pinout.xyz)):
+GPIO stands for General Purpose Input-Output, and is used to send and receive electrical signals. 40 "pins" make up the GPIO on the raspberry pi, each with a 2 different numbers assigned to it. The "physical" number, or the number the pin is based on location, and the "Broadcom Pin Number", or "BCM". The "BCM" pin number is usually what you deal with on the Raspberry Pi. The numbers are assigned as follows (credit to [pinout.xyz](https://pinout.xyz)):
 ![rpi pinout](https://pinout.xyz/resources/raspberry-pi-pinout.png)
 with the numbers above and below the pinout being the BCM numbers. Notice that not all pins are numbered: some pins, like physical pin 1, carry 3.3V; others, like physical pins 2 and 4, carry 5V. This is important because these pins always send a signal and are not controlled by the Pi, unlike the BCM numbered pins that only send a signal when told and can also be set up to receive signals.
 ## Breadboards with GPIO
