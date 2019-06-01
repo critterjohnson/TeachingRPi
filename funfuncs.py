@@ -142,27 +142,17 @@ def wait_for(*args, **kwargs):
 # shows what the camera is seeing for a specified amount of time
 # creates the camera if necessary
 def cam_preview(sec=10):
-	cam = shelve.open("cam", writeback=True)
-	if "obj" in cam:
-		camera = cam["obj"]
-	else:
-		camera = PiCamera()
+	camera = PiCamera()
 	camera.start_preview()
 	time.sleep(sec)
 	camera.stop_preview()
-	cam["obj"] = camera
-	cam.close()
 
 # takes a picture after a specified amount of time, saves to cwd/file_name.jpg
 # if timer < 2, it is overridden
 def cam(file_name, timer=2):
 	if timer < 2:
 		timer = 2
-	cam = shelve.open("cam", writeback=True)
-	if "obj" in cam:
-		camera = cam["obj"]
-	else:
-		camera = PiCamera()
+	camera = PiCamera()
 	camera.start_preview()
 	time.sleep(timer)
 	try:
@@ -171,5 +161,3 @@ def cam(file_name, timer=2):
 	except:
 		pass
 	camera.stop_preview() 
-	cam["obj"] = camera
-	cam.close()
