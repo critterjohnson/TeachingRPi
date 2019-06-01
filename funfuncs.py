@@ -10,10 +10,13 @@ import os
 def start():
 	GPIO.setmode(GPIO.BCM)
 	# creates/clears the shelf object
-	pins = shelve.open("pins")
+	pins = shelve.open("pins", writeback=True)
+	cam = shelve.open("cam", writeback=True)
 	pins["in"] = {}
 	pins["out"] = {}
+	cam.clear()
 	pins.close()
+	cam.close()
 
 # cleans up and turns off everything that isn't off
 def end():
@@ -137,18 +140,29 @@ def wait_for(*args, **kwargs):
 	pins.close()
 
 # shows what the camera is seeing for a specified amount of time
+# creates the camera if necessary
 def cam_preview(sec=10):
-	camera = PiCamera()
+	cam = shelve.open("cam", writeback=True)
+	if "obj" in cam:
+		camera = cam["obj"]
+	else:
+		camera = PiCamera()
 	camera.start_preview()
 	time.sleep(sec)
 	camera.stop_preview()
+	cam["obj"] = camera
+	cam.close()
 
 # takes a picture after a specified amount of time, saves to cwd/file_name.jpg
 # if timer < 2, it is overridden
 def cam(file_name, timer=2):
 	if timer < 2:
 		timer = 2
-	camera = PiCamera()
+	cam = shelve.open("cam", writeback=True)
+	if "obj" in cam:
+		camera = cam["obj"]
+	else:
+		camera = PiCamera()
 	camera.start_preview()
 	time.sleep(timer)
 	try:
@@ -157,3 +171,5 @@ def cam(file_name, timer=2):
 	except:
 		pass
 	camera.stop_preview() 
+	cam["obj"] = camera
+	cam.close()
