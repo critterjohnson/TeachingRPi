@@ -151,4 +151,16 @@ wait_for("button1", mode="and")
 # or mode:
 wait_for("button1", mode="or")
 ```
-funfuncs also has functions to interact with the camera.
+funfuncs also has functions to interact with the camera. cam_preview shows you what the camera is seeing:
+```python
+cam_preview(seconds)
+```
+and cam takes a picture for you and saves it as "file_name.jpg"
+```python
+cam("coolpic")
+```
+When using cam, you can also pass a length in seconds as a timer. cam will preview for that amount of time, then take a picture and save it. The timer length **must** be at least 2.
+```python
+cam("coolpic", 3)
+```
+**Note: The code will error if both cam_preview and cam are used. If you want to preview, then take a picture, simply use cam and set timer as the preview length.**
