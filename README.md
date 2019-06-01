@@ -59,12 +59,15 @@ def wait_for(*args, **kwargs)
 ```
 waits for a button or buttons passed to args by pin number or name (as passed to set_as_output)
 if nothing is passed, waits for all buttons
+
 if passed 
 ```python 
 mode="and"
 ``` 
 waits for all buttons to be pressed
+
 if passed 
+
 ```python 
 mode="or"
 ``` 
