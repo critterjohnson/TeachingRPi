@@ -30,6 +30,7 @@ waits 'sec' seconds; time.sleep(sec)
 def set_as_output(pin, name=None)
 ```
 sets 'pin' as an output pin by number and adds it to the persistent storage shelf
+
 additionally can be named using the 'name' parameter 
 
 ### set_as_input
@@ -37,6 +38,7 @@ additionally can be named using the 'name' parameter
 def set_as_output(pin, name=None)
 ```
 sets 'pin' as an output pin by number and adds it to the persistent storage shelf
+
 additionally can be named using the 'name' parameter 
 
 ### turn_on
@@ -44,6 +46,7 @@ additionally can be named using the 'name' parameter
 def turn_on(*args)
 ```
 turns on all lights passed in args by pin number or name (as passed to set_as_input)
+
 if nothing is passed, turns on all lights
 
 ### turn_off
@@ -51,6 +54,7 @@ if nothing is passed, turns on all lights
 def turn_off(*args)
 ```
 turns off all lights passed in args by pin number or name (as passed to set_as_input)
+
 if nothing is passed, turns off all lights
 
 ### wait_for
@@ -58,6 +62,7 @@ if nothing is passed, turns off all lights
 def wait_for(*args, **kwargs)
 ```
 waits for a button or buttons passed to args by pin number or name (as passed to set_as_output)
+
 if nothing is passed, waits for all buttons
 
 if passed 
@@ -84,4 +89,5 @@ shows what the camera is seeing for "sec" seconds
 def cam(file_name, timer=2)
 ```
 takes a picture and saves it to (current working directory)/file_name.jpg
+
 if timer > 2, timer is set to 2 (camera needs at least 2 seconds for the light sensors)
